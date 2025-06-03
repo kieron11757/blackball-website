@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>True Confessions - Anonymous Sharing Platform</title>
+    <meta name="description" content="Share your thoughts anonymously and connect with others through honest confessions in a safe, judgment-free environment.">
+    
+    <!-- iOS Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="True Confessions">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik05MCA0NUMxMDcuMTIzIDQ1IDEyMSA1OC44NzcgMTIxIDc2VjEwNEMxMjEgMTIxLjEyMyAxMDcuMTIzIDEzNSA5MCAxMzVDNzIuODc3IDEzNSA1OSAxMjEuMTIzIDU5IDEwNFY3NkM1OSA1OC44NzcgNzIuODc3IDQ1IDkwIDQ1WiIgZmlsbD0id2hpdGUiLz4KPHN0eWxlPgo8IVtDREFUQVsKQGdyYWRpZW50IGdyYWRpZW50MF9saW5lYXJfMV8xIHsKICBncmFkaWVudC10eXBlOiBsaW5lYXI7CiAgZ3JhZGllbnQtc3RvcHM6IDAgIzY2N2VlYSwgMSAjNzY0YmEyOwp9CgpdXT4KPHN0eWxlPgo8L3N2Zz4K">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a:hover, .nav-links a:active {
+            color: #764ba2;
+            background: rgba(118, 75, 162, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 18px 36px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cta-button:hover, .cta-button:active {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        .section {
+            padding: 4rem 0;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature:hover, .feature:active {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            margin-bottom: 1rem;
+            color: #764ba2;
+            font-size: 1.25rem;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .privacy-section, .terms-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .privacy-section h3, .terms-section h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .privacy-section ul, .terms-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-section li, .terms-section li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .contact-link {
+            color: #764ba2;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-link:hover, .contact-link:active {
+            background: rgba(118, 75, 162, 0.1);
+            transform: scale(1.05);
+        }
+
+        .ios-download-section {
+            background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .app-store-button {
+            display: inline-block;
+            background: #007AFF;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-height: 44px;
+            min-width: 200px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
+
+        .app-store-button:hover, .app-store-button:active {
+            background: #0056CC;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+        }
+
+        .safari-button {
+            background: #34C759;
+        }
+
+        .safari-button:hover, .safari-button:active {
+            background: #28A745;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #ccc;
+            transition: color 0.3s ease;
+            padding: 8px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        footer a:hover, footer a:active {
+            color: white;
+        }
+
+        /* iOS Specific Improvements */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .section {
+                margin: 1rem 0;
+                border-radius: 10px;
+                padding: 2rem 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature {
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 16px 32px;
+            }
+
+            /* Ensure touch targets are iOS compliant */
+            .contact-link {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 16px;
+                margin: 5px;
+            }
+        }
+
+        /* iOS Safari specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">True Confessions</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>True Confessions</h1>
+                <p>A safe space to share your thoughts anonymously. Connect with others through honest confessions in a judgment-free environment.</p>
+                <a href="#download" class="cta-button">📱 Get the App</a>
+            </div>
+        </section>
+
+        <div class="container">
+            <section id="download" class="ios-download-section">
+                <h2 style="color: white; margin-bottom: 1rem;">Download for iOS</h2>
+                <p style="margin-bottom: 2rem; opacity: 0.9;">Get True Confessions on your iPhone or iPad</p>
+                <a href="#" class="app-store-button">
+                    🍎 Download from App Store
+                </a>
+                <a href="#" class="app-store-button safari-button">
+                    🌐 Open in Safari
+                </a>
+            </section>
+
+            <section id="features" class="section">
+                <h2>Why Choose True Confessions?</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>100% Anonymous</h3>
+                        <p>Your identity is completely protected. Share without fear of judgment or exposure.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">❤️</div>
+                        <h3>Safe Community</h3>
+                        <p>Moderated environment ensures respectful interactions and supportive responses.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🌟</div>
+                        <h3>Real Stories</h3>
+                        <p>Connect with authentic experiences from people going through similar situations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="privacy" class="section">
+                <h2>Privacy & Terms</h2>
+                
+                <div class="privacy-section">
+                    <h3>Privacy Policy</h3>
+                    <p>Your privacy is our top priority. Here's how we protect your information:</p>
+                    <ul>
+                        <li>No personal data collection - confessions are completely anonymous</li>
+                        <li>No tracking or profiling of users</li>
+                        <li>All content is encrypted and stored securely</li>
+                        <li>Option to delete your confessions at any time</li>
+                        <li>No sharing of data with third parties</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3>Terms of Service</h3>
+                    <p>By using True Confessions, you agree to:</p>
+                    <ul>
+                        <li>Share content respectfully and honestly</li>
+                        <li>Not post harmful, illegal, or inappropriate content</li>
+                        <li>Respect other users' experiences and feelings</li>
+                        <li>Use the platform for its intended purpose of authentic sharing</li>
+                        <li>Report any concerning content to our moderation team</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #666;">
+                    Questions, concerns, or feedback? We're here to listen.
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <div style="margin-bottom: 1rem;">
+                        <p><strong>📧 Email:</strong> <a href="mailto:trueconfession11757@gmail.com" class="contact-link">trueconfession11757@gmail.com</a></p>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <p><strong>📱 Instagram:</strong> <a href="https://www.instagram.com/trueconfession11757/" target="_blank" class="contact-link">@trueconfession11757</a></p>
+                    </div>
+                    <p style="margin-top: 1.5rem;"><strong>Response Time:</strong> Within 24 hours</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 True Confessions. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#contact">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // iOS-specific optimizations
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            // Prevent zoom on double tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+
+            // Add iOS-specific classes
+            document.body.classList.add('ios-device');
+        }
+
+        // Enhanced touch feedback for buttons
+        document.querySelectorAll('a, button, .feature').forEach(element => {
+            element.addEventListener('touchstart', function() {
+                this.style.opacity = '0.7';
+            });
+            
+            element.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
